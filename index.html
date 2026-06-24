@@ -25,14 +25,15 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
-
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;max-width:100%;}
 body{
   font-family:var(--body);
   background:var(--carbon);
   color:var(--white);
   overflow-x:hidden;
+  max-width:100%;
   font-weight:300;
+  position:relative;
 }
 
 /* ---------- BACKGROUND VIDEO ---------- */
