@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://www.torioenergy.com/assets/favicon-512.png">
 <meta property="og:url" content="https://www.torioenergy.com/">
 <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="192x192" href="assets/favicon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
@@ -36,6 +36,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;max-width:100%;}
+
 body{
   font-family:var(--body);
   background:var(--carbon);
@@ -54,6 +55,8 @@ body{
   object-fit:cover;
   z-index:0;
 }
+#bg-video::-webkit-media-controls,#bg-video::-webkit-media-controls-panel,#bg-video::-webkit-media-controls-start-playback-button,#bg-video::-webkit-media-controls-play-button,#bg-video::-webkit-media-controls-overlay-play-button{display:none !important;-webkit-appearance:none;opacity:0 !important;}
+#bg-video{pointer-events:none;}
 #bg-video-tint{
   position:fixed;
   inset:0;
@@ -213,6 +216,12 @@ nav.scrolled{
 .hero .counter{position:absolute;top:120px;left:6%;margin:0;}
 .hero-text{
   position:absolute;bottom:11%;left:6%;max-width:620px;
+}
+.hero-text::before{
+  content:'';position:absolute;z-index:-1;
+  left:-30%;right:-30%;top:-25%;bottom:-30%;
+  background:radial-gradient(75% 75% at 28% 60%, rgba(10,9,8,0.62) 0%, rgba(10,9,8,0.34) 40%, rgba(10,9,8,0.12) 62%, rgba(10,9,8,0) 80%);
+  filter:blur(30px);pointer-events:none;
 }
 .hero-text h1{
   font-size:clamp(44px,6vw,84px);
@@ -439,7 +448,16 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
   .hamburger{display:flex;}
   .hero-text h1{font-size:clamp(38px,11vw,56px);}
   .hero-quote{display:none;}
-  .hero-text{max-width:88%;}
+  .scroll-indicator{bottom:14px;}
+  .scroll-indicator .line{height:30px;}
+  .hero-text{max-width:88%;bottom:15%;position:absolute;}
+  .hero-text::before{
+    content:'';position:absolute;z-index:-1;
+    left:-30%;right:-30%;top:-25%;bottom:-30%;
+    background:radial-gradient(75% 75% at 32% 60%, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.55) 40%, rgba(10,9,8,0.22) 62%, rgba(10,9,8,0) 80%);
+    filter:blur(30px);pointer-events:none;
+  }
+  .hero-text p{text-shadow:0 1px 14px rgba(10,9,8,0.9);}
   .services-grid{grid-template-columns:1fr;}
   .stats-grid{grid-template-columns:1fr 1fr;}
   .stat:nth-child(3){border-left:none;}
@@ -448,6 +466,8 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
   #connect{padding:100px 6% 0;}
 }
 @media (max-width:560px){
+  .connect-cta h2{font-size:clamp(30px,10.5vw,56px) !important;line-height:0.95;letter-spacing:-0.02em;}
+  #process h2{font-size:clamp(28px,8vw,36px) !important;line-height:1.2 !important;max-width:100% !important;height:auto !important;word-wrap:break-word;overflow-wrap:break-word;hyphens:auto;}
   .stats-grid{grid-template-columns:1fr;}
   .stat{border-left:none;border-top:0.5px solid rgba(232,84,26,0.2);}
   .stat:first-child{border-top:none;}
@@ -459,8 +479,8 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
 <body>
 
 <!-- BACKGROUND VIDEO (permanent, fixed) -->
-<video id="bg-video" autoplay muted loop playsinline poster="assets/hero-frame.png">
-<source src="https://res.cloudinary.com/dcalkbngb/video/upload/q_auto/f_auto/v1782076676/rocafinal_ikfsd4.mp4" type="video/mp4">
+<video id="bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/hero-frame.png">
+  <source src="https://res.cloudinary.com/dcalkbngb/video/upload/q_auto/f_auto/v1782076676/rocafinal_ikfsd4.mp4" type="video/mp4">
 </video>
 <div id="bg-video-tint"></div>
 
@@ -469,12 +489,12 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
 <div class="cursor-dot"></div>
 
 <!-- NAVBAR -->
-<nav id="navbar" style="height: 50px">
+<nav id="navbar">
   <a class="nav-brand" href="#main" data-hover style="font-size: 29px; align-items: center; line-height: 1.4; letter-spacing: 2px; text-decoration: none">
     <img src="assets/logo-transparent.png" alt="Torio Energy" style="background: transparent; width: 40px; height: 40px">
     <span style="font-size: 20px; text-align: left">TORIO ENERGY</span>
   </a>
-  <ul class="nav-links" style="display:none">
+  <ul class="nav-links">
     <li><a href="#main" data-hover>MENU</a></li>
     <li><a href="#offering" data-hover>Offering</a></li>
     <li><a href="#case" data-hover>Case</a></li>
@@ -482,8 +502,8 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
     <li><a href="#crew" data-hover>Crew</a></li>
     <li><a href="#connect" data-hover>Connect</a></li>
   </ul>
-  <a href="#connect" class="nav-cta" data-hover style="display:none">CONTACTO</a>
-  <button class="hamburger" id="hamburger" aria-label="Menú" data-hover style="display:none">
+  <a href="#connect" class="nav-cta" data-hover>CONTACTO</a>
+  <button class="hamburger" id="hamburger" aria-label="Menú" data-hover>
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -577,7 +597,7 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
   <span class="counter reveal">003 / 006</span>
   <h2 class="reveal">NÚMEROS QUE RESPALDAN NUESTRA INGENIERÍA</h2>
   <div class="stats-grid">
-    <div class="stat reveal" data-hover><div class="num">67<span style="color: #e8541a">+</span></div><span class="lbl">Proyectos entregados</span></div>
+    <div class="stat reveal" data-hover><div class="num"><span>120</span><span style="color: #e8541a">+</span></div><span class="lbl">Proyectos entregados</span></div>
     <div class="stat reveal reveal-delay-1" data-hover><div class="num">98<em>%</em></div><span class="lbl">Tasa de retención</span></div>
     <div class="stat reveal reveal-delay-2" data-hover><div class="num">3<em>x</em></div><span class="lbl">Productividad media</span></div>
     <div class="stat reveal reveal-delay-3" data-hover><div class="num">72<em>h</em></div><span class="lbl">Primer prototipo</span></div>
@@ -626,7 +646,7 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
 
 <!-- 5. RATES -->
 <section class="section-glass" id="rates">
-  <span class="counter reveal" style="position:absolute;left:6%;text-align:left;">005 / 006</span>
+  <span class="counter reveal" style="position:absolute;left:6%;top:48px;text-align:left;">005 / 006</span>
   <span class="label reveal" style="font-size: 12px">CONSULTORÍA INICIAL</span>
   <h2 class="reveal reveal-delay-1">GRATUITA</h2>
   <p class="sub reveal reveal-delay-2">Cuéntanos tu problema. En 24 horas tenemos una propuesta técnica.</p>
@@ -745,7 +765,7 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="left">© 2026 Torio Energy. Todos los derechos reservados.</span>
+      <span class="left">© 2015–<span id="year">2026</span> Torio Energy. Todos los derechos reservados.</span>
       <span class="right">Energía en cada línea de código</span>
     </div>
   </footer>
@@ -754,6 +774,9 @@ html.anim-off .reveal{opacity:1 !important;transform:none !important;transition:
 </main>
 
 <script>
+/* ---------- FOOTER YEAR ---------- */
+document.addEventListener('DOMContentLoaded',function(){var y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();});
+
 /* ---------- CALENDLY ---------- */
 function openCalendly(){
   if(window.Calendly){
@@ -779,15 +802,28 @@ function openCalendly(){
   },140);
 })();
 
-/* ---------- VIDEO: skip heavy load on mobile, use poster ---------- */
+/* ---------- VIDEO: robust autoplay (iOS/Android, low-power mode) ---------- */
 (function(){
   var video=document.getElementById('bg-video');
-  if(window.matchMedia('(max-width:768px)').matches){
-    video.setAttribute('preload','none');
+  video.muted=true;video.defaultMuted=true;video.playsInline=true;
+  video.setAttribute('muted','');video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');
+  video.removeAttribute('controls');
+  function tryPlay(){
+    if(!video.paused)return;
+    var p=video.play();
+    if(p&&p.catch)p.catch(function(){});
   }
-  // ensure autoplay kicks in
-  var p=video.play();
-  if(p!==undefined){p.catch(function(){});}
+  tryPlay();
+  ['loadedmetadata','canplay','loadeddata'].forEach(function(ev){video.addEventListener(ev,tryPlay);});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tryPlay();});
+  window.addEventListener('pageshow',tryPlay);
+  // if blocked (e.g. iOS low-power mode), start on first user interaction
+  ['touchstart','touchend','click','scroll'].forEach(function(ev){
+    window.addEventListener(ev,tryPlay,{passive:true});
+  });
+  // recover from stalls
+  video.addEventListener('stalled',function(){video.load();tryPlay();});
+  setTimeout(tryPlay,1500);
 })();
 
 /* ---------- NAVBAR scroll state ---------- */
